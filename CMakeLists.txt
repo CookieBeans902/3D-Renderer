@@ -14,7 +14,8 @@ project ("Renderer")
 # Add source to this project's executable.
 add_executable (Renderer 
 	"src/application.cpp"
-)
+	"src/renderer.cpp" 
+	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp")
 target_include_directories(Renderer PRIVATE 
 	${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
 	${CMAKE_SOURCE_DIR}/dependencies/GLEW/include
@@ -32,7 +33,7 @@ target_compile_definitions(Renderer PRIVATE
 	GLEW_STATIC
 )
 
-# This passes a macro called ROOT_DIR to your C++ code
+# This passes a macro called ROOT_DIR as a string to your C++ code
 target_compile_definitions(Renderer PRIVATE ROOT_DIR="${CMAKE_SOURCE_DIR}")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
