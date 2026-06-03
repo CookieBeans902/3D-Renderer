@@ -10,6 +10,10 @@
 #include "renderer.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+
+#include "VertexArray.h"
+#include "VertexBufferLayout.h"
+
 #ifndef ROOT_DIR
 #define ROOT_DIR = "."
 #endif ROOT_DIR
@@ -128,17 +132,21 @@ int main(void)
         0, 1 ,2,
         2, 3, 0
     };
-    unsigned int vao;
+    /*unsigned int vao;
     glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    glBindVertexArray(vao); */
+
+    VertexArray vao;
 
     VertexBuffer vbo(vertices, sizeof(vertices));
 
     IndexBuffer ibo(indices, 6);
 
-
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
-    glEnableVertexAttribArray(0);
+    VertexBufferLayout layout;
+    layout.Push<float>(2);
+    vao.AddBuffer(vbo, layout);
+    /*glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glEnableVertexAttribArray(0);*/
 
 
     std::string shaderPath = projectRoot + "/res/shaders/basic.shader";
@@ -160,8 +168,10 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT); 
 
+        vao.Bind();
+        ibo.Bind();
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
         /* Swap front and back buffers */
