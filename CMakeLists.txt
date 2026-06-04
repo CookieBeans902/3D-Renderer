@@ -15,7 +15,7 @@ project ("Renderer")
 add_executable (Renderer 
 	"src/application.cpp"
 	"src/renderer.cpp" 
-	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp" "src/VertexBufferLayout.h" "src/VertexArray.h" "src/VertexArray.cpp")
+	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp" "src/VertexBufferLayout.h" "src/VertexArray.h" "src/VertexArray.cpp" "src/Shader.h" "src/Shader.cpp")
 target_include_directories(Renderer PRIVATE 
 	${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
 	${CMAKE_SOURCE_DIR}/dependencies/GLEW/include
