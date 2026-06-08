@@ -79,17 +79,14 @@ int main(void)
     vao.Unbind();
     ibo.Unbind();
     shader.Unbind();
+    Renderer renderer;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT); 
+        renderer.Clear();
 
-        vao.Bind();
-        ibo.Bind();
-        shader.Bind();
-        GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-
+        renderer.Draw(vao, ibo, shader);
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
