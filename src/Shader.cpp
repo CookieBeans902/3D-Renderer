@@ -8,7 +8,7 @@
 #include <filesystem>
 
 Shader::Shader(const std::string& filepath)
-:m_filepath(filepath) 
+:m_FilePath(filepath) 
 {
     ShaderProgramSource source = ParseShader();
     m_RendererID = CreateShader(source.vertexShader, source.fragmentShader);
@@ -19,7 +19,7 @@ Shader::~Shader()
 }
 ShaderProgramSource Shader::ParseShader()
 {
-    std::ifstream stream(m_filepath);
+    std::ifstream stream(m_FilePath);
     std::string line;
     std::stringstream ss[2];
     enum class ShaderType {
@@ -95,12 +95,16 @@ void Shader::SetUniform4f(const std::string& name, float v1, float v2, float v3,
 {
     GLCall(glUniform4f(GetUniformLocation(name), v1, v2, v3, v4));
 }
+void Shader::SetUniform1i(const std::string& name, int value)
+{
+    GLCall(glUniform1i(GetUniformLocation(name),value));
+}
 
 int Shader::GetUniformLocation(const std::string& name)
 {
     GLCall(int location = glGetUniformLocation(m_RendererID,name.c_str()));
     if (location == -1) {
-        std::cout << "Location of '" << m_filepath << "' shader is missing. Please refer. " << std::endl;
+        std::cout << "Location of '" << name << "' uniform is missing. Please refer. " << std::endl;
     }
     return location;
 }
