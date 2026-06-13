@@ -19,6 +19,7 @@ add_executable (Renderer
 target_include_directories(Renderer PRIVATE 
 	${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
 	${CMAKE_SOURCE_DIR}/dependencies/GLEW/include
+	${CMAKE_SOURCE_DIR}/dependencies/glm
 )
 target_link_directories(Renderer PRIVATE
 	${CMAKE_SOURCE_DIR}/dependencies/GLFW/lib-vc2022/

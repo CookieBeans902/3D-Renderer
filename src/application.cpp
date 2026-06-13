@@ -17,6 +17,11 @@
 #include "Shader.h"
 #include "Texture.h"
 
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #ifndef ROOT_DIR
 #define ROOT_DIR = "."
 #endif ROOT_DIR
@@ -88,15 +93,16 @@ int main(void)
     ibo.Unbind();
     shader.Unbind();
 
-    GLCall(glActiveTexture(GL_TEXTURE0));
-    Texture texture1(texturePath1, GL_RGB);
-    GLCall(glActiveTexture(GL_TEXTURE1));
-    Texture texture2(texturePath2, GL_RGBA);
+    Texture texture1(texturePath1);
+    Texture texture2(texturePath2);
+    texture1.Bind(0);
+    texture2.Bind(1);
     Renderer renderer;
     
     shader.Bind();
     shader.SetUniform1i("ourTexture1", 0);
     shader.SetUniform1i("ourTexture2", 1);
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -107,6 +113,11 @@ int main(void)
 
         shader.Bind();
         shader.SetUniform4f("u_Color", 0.0f, colorVal, 0.0f, 1.0f);
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        shader.SetUniformMatrix4fv("transform", trans);
 
 
         renderer.Draw(vao, ibo, shader);

@@ -8,9 +8,11 @@ layout(location = 2) in vec2 aTextCoords;
 out vec3 rgb_color;
 out vec2 textCoords;
 
+uniform mat4 transform;
+
 void main()
 {
-   gl_Position = position;
+   gl_Position = transform * position;
    rgb_color = aColor;
    textCoords = aTextCoords;
 }
@@ -27,8 +29,7 @@ uniform sampler2D ourTexture1;
 uniform sampler2D ourTexture2;
 
 
-
 void main()
 {
-	color = mix(texture(ourTexture1,textCoords),texture(ourTexture2,textCoords),0.2) * rgb_color;
+	color = mix(texture(ourTexture1,textCoords),texture(ourTexture2,textCoords),0.2)*rgb_color;
 };

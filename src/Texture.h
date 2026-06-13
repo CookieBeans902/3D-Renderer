@@ -8,11 +8,10 @@ private:
 	int m_Width;
 	int m_Height;
 	int m_Channels;
-	unsigned int m_Format;
 public:
-	Texture(const std::string& filepath, unsigned int format);
+	Texture(const std::string& filepath	);
 	~Texture();
 
-	void Bind() const;
+	void Bind(int slot = 0) const;
 	void Unbind() const;
 };
