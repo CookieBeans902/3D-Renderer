@@ -6,9 +6,8 @@
 #include <string>
 #include <sstream>
 #include <filesystem>
-
-Shader::Shader(const std::string& filepath)
-:m_FilePath(filepath) 
+Shader::Shader(std::string vertexPath, std::string fragmentPath)
+:m_VertexShaderPath(std::move(vertexPath)), m_FragmentShaderPath(std::move(fragmentPath))
 {
     ShaderProgramSource source = ParseShader();
     m_RendererID = CreateShader(source.vertexShader, source.fragmentShader);
@@ -19,35 +18,31 @@ Shader::~Shader()
 }
 ShaderProgramSource Shader::ParseShader()
 {
-    std::ifstream stream(m_FilePath);
-    std::string line;
-    std::stringstream ss[2];
-    enum class ShaderType {
-        NONE = -1, VERTEX = 0, FRAGMENT = 1
-    };
-    ShaderType type = ShaderType::NONE;
-    while (getline(stream, line)) {
-        if (line.length() == 0) {
-            continue;
-        }
-        if (line.find("#shader") != std::string::npos)
-        {
-            if (line.find("vertex") != std::string::npos)
-            {
-                type = ShaderType::VERTEX;
-            }
-            else if (line.find("fragment") != std::string::npos)
-            {
-                type = ShaderType::FRAGMENT;
-            }
-        }
-        else {
-            if (type != ShaderType::NONE) {
-                ss[(int)type] << line << "\n";
-            }
-        }
+    std::string vertexCode;
+    std::string fragmentCode;
+    std::ifstream vsFile(m_VertexShaderPath);
+    std::ifstream fsFile(m_FragmentShaderPath);
+
+    try
+    {
+        vsFile.open(m_VertexShaderPath);
+        fsFile.open(m_FragmentShaderPath);
+
+        std::stringstream vShaderStream, fShaderStream;
+        vShaderStream << vsFile.rdbuf();
+        fShaderStream << fsFile.rdbuf();
+
+        vsFile.close();
+        fsFile.close();
+        
+        vertexCode = vShaderStream.str();
+        fragmentCode = fShaderStream.str();
     }
-    return { ss[0].str(),ss[1].str() };
+    catch (std::ifstream::failure e)
+    {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+    }
+    return { vertexCode , fragmentCode };
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
@@ -94,6 +89,10 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 void Shader::SetUniform4f(const std::string& name, float v1, float v2, float v3, float v4)
 {
     GLCall(glUniform4f(GetUniformLocation(name), v1, v2, v3, v4));
+}
+void Shader::SetUniform3f(const std::string& name, float v1, float v2, float v3)
+{
+    GLCall(glUniform3f(GetUniformLocation(name), v1, v2, v3));
 }
 void Shader::SetUniform1i(const std::string& name, int value)
 {
