@@ -17,18 +17,23 @@ add_executable (Renderer
 	"src/renderer.cpp" 
 	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp" "src/VertexBufferLayout.h" "src/VertexArray.h" "src/VertexArray.cpp" "src/Shader.h" "src/Shader.cpp" "src/external/stb_image.cpp" "src/Texture.h" "src/Texture.cpp" "src/Camera.cpp" "src/Camera.h")
 target_include_directories(Renderer PRIVATE 
-	${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
-	${CMAKE_SOURCE_DIR}/dependencies/GLEW/include
 	${CMAKE_SOURCE_DIR}/dependencies/glm
 )
-target_link_directories(Renderer PRIVATE
-	${CMAKE_SOURCE_DIR}/dependencies/GLFW/lib-vc2022/
-	${CMAKE_SOURCE_DIR}/dependencies/GLEW/lib/Release/Win32/
+add_library(GLEW STATIC IMPORTED)
+add_library(GLFW STATIC IMPORTED)
+
+set_target_properties(GLEW PROPERTIES 
+	IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/dependencies/GLEW/lib/Release/x64/glew32s.lib
+	INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/dependencies/GLEW/include
+)
+set_target_properties(GLFW PROPERTIES 
+	IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/dependencies/GLFW/lib-vc2022/glfw3.lib
+	INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
 )
 target_link_libraries(Renderer PRIVATE 
-	glfw3
+	GLEW
+	GLFW
 	opengl32
-	glew32s
 )
 target_compile_definitions(Renderer PRIVATE 
 	GLEW_STATIC
