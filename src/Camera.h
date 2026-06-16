@@ -44,4 +44,5 @@ public:
 	void ProcessMouseScroll(float yoffset);
 
 	inline float GetZoom() const { return m_Zoom; }
+	inline glm::vec3 GetPosition() const { return m_CameraPos; }
 };

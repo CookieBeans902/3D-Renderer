@@ -76,51 +76,52 @@ int main(void)
         return -1;
     }
 
-    float vertices2[] = {
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+    float cubeVertices[] = {
+    // Vertices           // Normal vectors
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
-    float vertices1[] = {
+    float rectangleVertices[] = {
         // positions          // texture coords
          0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
          0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
@@ -128,38 +129,27 @@ int main(void)
         -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
     };
 
-    unsigned int indices[] = {
-        0, 1, 2,
-        0, 2, 3
-    };
+  
 
     VertexArray vao;
 
-    VertexBuffer vbo(vertices2, sizeof(vertices2));
+    VertexBuffer vbo(cubeVertices, sizeof(cubeVertices));
 
-    IndexBuffer ibo(indices, 6);
 
     VertexBufferLayout layout;
     layout.Push<float>(3);
-    layout.Push<float>(2);
-    vao.AddBuffer(vbo, layout);
+    layout.Push<float>(3);
 
+    std::string shaderPath = projectRoot + "/res/shaders/";
+    std::string texturePath1 = projectRoot + "/res/textures/container.jpg";
+    std::string texturePath2 = projectRoot + "/res/textures/random.png";
 
-    std::string shaderPath = projectRoot + "/res/shaders/basic.shader";
-
-
-    Shader shader(shaderPath);
+    Shader shader(shaderPath + "basic.vert",shaderPath + "basic.frag");
 
     shader.Bind();
     shader.SetUniform4f("u_Color", 1.0f, 0.5f, 0.2f, 1.0f);
 
-    std::string texturePath1 = projectRoot + "/res/textures/container.jpg";
-    std::string texturePath2 = projectRoot + "/res/textures/random.png";
-
-    
-
     vao.Unbind();
-    ibo.Unbind();
     shader.Unbind();
 
     Texture texture1(texturePath1);
@@ -172,26 +162,21 @@ int main(void)
     shader.SetUniform1i("ourTexture1", 0);
     shader.SetUniform1i("ourTexture2", 1);
 
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, -2.5f),
-        glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-    };
-
-
-
     glEnable(GL_DEPTH_TEST);
     /* Loop until the user closes the window */
     vao.Bind();
 
+    /*Defining the color and light objects */
 
+    Shader lightShader(shaderPath + "light.vert",shaderPath + "light.frag");
+    lightShader.Bind();
+    lightShader.SetUniform3f("objectColor", 0.5f, 0.2f, 1.0f);
+    lightShader.SetUniform3f("lightColor", 1.0f, 1.0f, 1.0f);
+    lightShader.SetUniformMatrix4fv("model", glm::mat4(1.0f));
+
+    VertexArray lightVAO;
+    lightVAO.AddBuffer(vbo, layout);
+    Shader lightSourceShader(shaderPath + "light.vert", shaderPath + "lightsource.frag");
     while (!glfwWindowShouldClose(window))
     {
         float currentFrame = static_cast<float>(glfwGetTime());
@@ -203,24 +188,36 @@ int main(void)
         /* Render here */
         renderer.Clear();
         
+        lightSourceShader.Bind();
+        lightVAO.Bind();
+        float radius = 2.0f;
+        float sincomp = static_cast<float>(sin(glfwGetTime()));
+        float coscomp = static_cast<float>(cos(glfwGetTime()));
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(coscomp, 1.2f, sincomp));
+        model = glm::scale(model, glm::vec3(0.2f));
+        lightSourceShader.SetUniformMatrix4fv("model", model);
         glm::mat4 projection = glm::perspective(glm::radians(camera.GetZoom()), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        shader.SetUniformMatrix4fv("projection", projection);
-
+        lightSourceShader.SetUniformMatrix4fv("projection", projection);
         glm::mat4 view;
         view = camera.GetViewMatrix();
-        shader.SetUniformMatrix4fv("view", view);
-        vao.Bind();
-        for (unsigned int i = 0; i < 10; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            shader.SetUniformMatrix4fv("model", model);
+        lightSourceShader.SetUniformMatrix4fv("view", view);
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-        //renderer.Draw(vao, ibo, shader);
+
+        lightShader.Bind();
+        lightShader.SetUniformMatrix4fv("projection", projection);
+        lightShader.SetUniformMatrix4fv("view", view);
+        lightShader.SetUniformMatrix4fv("model", glm::mat4(1.0f));
+        lightShader.SetUniform3f("lightPos", coscomp, 1.2f, sincomp);
+        lightShader.SetUniform3f("viewPos", camera.GetPosition());
+        
+        lightSourceShader.Bind();
+        lightVAO.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        lightVAO.Bind(); 
+        lightShader.Bind();
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

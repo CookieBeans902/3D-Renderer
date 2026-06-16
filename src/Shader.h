@@ -26,6 +26,7 @@ public:
 	// Uniform declarations
 	void SetUniform4f(const std::string& name, float v1, float v2, float v3, float v4);
 	void SetUniform3f(const std::string& name, float v1, float v2, float v3);
+	void SetUniform3f(const std::string& name,glm::vec3 pos);
 	void SetUniform1i(const std::string& name, int value);
 	void SetUniformMatrix4fv(const std::string& name, glm::mat4 matrix);
 	int GetUniformLocation(const std::string& name);
