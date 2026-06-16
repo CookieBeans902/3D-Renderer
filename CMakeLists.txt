@@ -15,7 +15,7 @@ project ("Renderer")
 add_executable (Renderer 
 	"src/application.cpp"
 	"src/renderer.cpp" 
-	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp" "src/VertexBufferLayout.h" "src/VertexArray.h" "src/VertexArray.cpp" "src/Shader.h" "src/Shader.cpp" "src/external/stb_image.cpp" "src/Texture.h" "src/Texture.cpp" "src/Camera.cpp" "src/Camera.h")
+	"src/renderer.h" "src/VertexBuffer.h" "src/VertexBuffer.cpp"  "src/IndexBuffer.h" "src/IndexBuffer.cpp" "src/VertexBufferLayout.h" "src/VertexArray.h" "src/VertexArray.cpp" "src/Shader.h" "src/Shader.cpp" "src/external/stb_image.cpp" "src/Texture.h" "src/Texture.cpp" "src/Camera.cpp" "src/Camera.h" "src/Mesh.h" "src/Mesh.cpp" "src/Model.h" "src/Model.cpp")
 target_include_directories(Renderer PRIVATE 
 	${CMAKE_SOURCE_DIR}/dependencies/glm
 )
@@ -30,10 +30,27 @@ set_target_properties(GLFW PROPERTIES
 	IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/dependencies/GLFW/lib-vc2022/glfw3.lib
 	INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/dependencies/GLFW/include
 )
+
+include(FetchContent)
+
+# Assimp options (set BEFORE FetchContent_MakeAvailable)
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+
+FetchContent_Declare(
+    assimp
+    GIT_REPOSITORY https://github.com/assimp/assimp.git
+    GIT_TAG v6.0.2
+)
+
+FetchContent_MakeAvailable(assimp)
+
 target_link_libraries(Renderer PRIVATE 
 	GLEW
 	GLFW
 	opengl32
+	assimp
 )
 target_compile_definitions(Renderer PRIVATE 
 	GLEW_STATIC

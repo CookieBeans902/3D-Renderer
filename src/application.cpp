@@ -1,6 +1,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#include <assimp/Importer.hpp>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,8 +15,10 @@
 #include "VertexBufferLayout.h"
 
 #include "Shader.h"
-#include "Texture.h"
+//#include "Texture.h"
 #include "Camera.h"
+#include "Model.h"
+#include "external/stb_image.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -152,10 +154,10 @@ int main(void)
     vao.Unbind();
     shader.Unbind();
 
-    Texture texture1(texturePath1);
-    Texture texture2(texturePath2);
-    texture1.Bind(0);
-    texture2.Bind(1);
+    //Texture texture1(texturePath1);
+    //Texture texture2(texturePath2);
+    //texture1.Bind(0);
+    //texture2.Bind(1);
     Renderer renderer;
     
     shader.Bind();
@@ -175,8 +177,10 @@ int main(void)
     lightShader.SetUniformMatrix4fv("model", glm::mat4(1.0f));
 
     VertexArray lightVAO;
-    lightVAO.AddBuffer(vbo, layout);
-    Shader lightSourceShader(shaderPath + "light.vert", shaderPath + "lightsource.frag");
+    
+    stbi_set_flip_vertically_on_load(true);
+    Model object = Model(projectRoot + "/res/models/backpack/backpack.obj");
+    Shader objectShader(shaderPath + "model.vert", shaderPath + "model.frag");
     while (!glfwWindowShouldClose(window))
     {
         float currentFrame = static_cast<float>(glfwGetTime());
@@ -188,36 +192,19 @@ int main(void)
         /* Render here */
         renderer.Clear();
         
-        lightSourceShader.Bind();
-        lightVAO.Bind();
-        float radius = 2.0f;
-        float sincomp = static_cast<float>(sin(glfwGetTime()));
-        float coscomp = static_cast<float>(cos(glfwGetTime()));
+       
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(coscomp, 1.2f, sincomp));
-        model = glm::scale(model, glm::vec3(0.2f));
-        lightSourceShader.SetUniformMatrix4fv("model", model);
+        model = glm::translate(model, glm::vec3(0.0f));
+        model = glm::scale(model, glm::vec3(1.0f));
+        objectShader.Bind();
+        objectShader.SetUniformMatrix4fv("model", model);
         glm::mat4 projection = glm::perspective(glm::radians(camera.GetZoom()), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        lightSourceShader.SetUniformMatrix4fv("projection", projection);
+        objectShader.SetUniformMatrix4fv("projection", projection);
         glm::mat4 view;
         view = camera.GetViewMatrix();
-        lightSourceShader.SetUniformMatrix4fv("view", view);
+        objectShader.SetUniformMatrix4fv("view", view);
 
-
-        lightShader.Bind();
-        lightShader.SetUniformMatrix4fv("projection", projection);
-        lightShader.SetUniformMatrix4fv("view", view);
-        lightShader.SetUniformMatrix4fv("model", glm::mat4(1.0f));
-        lightShader.SetUniform3f("lightPos", coscomp, 1.2f, sincomp);
-        lightShader.SetUniform3f("viewPos", camera.GetPosition());
-        
-        lightSourceShader.Bind();
-        lightVAO.Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        lightVAO.Bind(); 
-        lightShader.Bind();
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        object.Draw(objectShader);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

@@ -111,7 +111,7 @@ int Shader::GetUniformLocation(const std::string& name)
 {
     GLCall(int location = glGetUniformLocation(m_RendererID,name.c_str()));
     if (location == -1) {
-        std::cout << "Location of '" << name << "' uniform is missing. Please refer. " << std::endl;
+        //std::cout << "Location of '" << name << "' uniform is missing. Please refer. " << std::endl;
     }
     return location;
 }

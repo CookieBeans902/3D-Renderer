@@ -2,15 +2,6 @@
 
 A custom 3D renderer built in C++ using modern OpenGL. This project follows the foundational concepts from [LearnOpenGL.com](https://learnopengl.com/), providing a robust architecture for rendering 3D graphics, handling textures, and managing shaders.
 
-## Gallery
-
-
-<div align="center">
-  <img src="docs/assets/screenshot_1.png" alt="Basic Setup & Textures" width="400"/>
-  <img src="docs/assets/screenshot_2.png" alt="Transformations & Coordinate Systems" width="400"/>
-  <br/>
-  <img src="docs/assets/screenshot_3.png" alt="Camera Movement" width="600"/>
-</div>
 
 ## Features
 
@@ -84,6 +75,16 @@ This project uses CMake for its build system. The `CMakeLists.txt` automatically
     ├── external/          # Third-party source files (stb_image)
     └── ...                # Core component classes (Shader, Texture, Buffers)
 ```
+## Gallery
+
+
+<div align="center">
+  <img src="docs/assets/screenshot_1.png" alt="Basic Setup & Textures" width="400"/>
+  <img src="docs/assets/screenshot_2.png" alt="Transformations & Coordinate Systems" width="400"/>
+  <br/>
+  <img src="docs/assets/screenshot_3.png" alt="Camera Movement" width="600"/>
+</div>
+
 
 ### Acknowledgments
 **LearnOpenGL** - An incredible resource for learning computer graphics.
